@@ -7,26 +7,20 @@
  *
  */
 
-import { LOAD_REPOS_SUCCESS, LOAD_REPOS, LOAD_REPOS_ERROR } from './constants';
+import { YOUR_ACTION_CONSTANT } from './constants';
 
 // The initial state of the App
 export const initialState = {
-  loading: false,
-  error: false,
-  currentUser: false,
-  userData: {
-    repositories: false,
-  },
 };
 
 /* eslint-disable default-case, no-param-reassign */
 const appReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'AUTHENTICATE_TOKEN':
-      return state;
-    default:
-      return state;
-  }
+    switch (action.type) {
+        case YOUR_ACTION_CONSTANT:
+            return state;
+        default:
+            return state;
+    }
 };
 
 export default appReducer;

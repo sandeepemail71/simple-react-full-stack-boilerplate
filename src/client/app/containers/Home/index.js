@@ -29,9 +29,10 @@ const HomeWrapper = styled.div`
 `;
 
 function Home(props) {
+    console.log(props.theme,"======props.theme")
 	return (
 		<HomeWrapper>
-			<h1>Home component</h1>
+            <h1>Home component</h1>
             <Button>Submit</Button>
 		</HomeWrapper>
 	);

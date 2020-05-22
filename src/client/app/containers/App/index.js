@@ -18,6 +18,9 @@ import injectSaga from 'utils/injectSaga';
 import reducer from './reducer';
 import saga from './saga';
 
+import { ThemeProvider, ThemeConsumer } from 'styled-components'
+import theme from 'components/themes/default'
+
 import { makeSelectProps } from './selectors';
 
 import Home from './../Home';
@@ -33,26 +36,32 @@ const AppWrapper = styled.div`
 function App(props) {
     return (
         <AppWrapper>
-            <Router>
-                <Switch>
-                    <Route exact path="/"
-                        render={
-                            props => (
-                                <Home {...props} />
-                            )
-                        }
-                        history={history}
-                    />
-                    <Route
-                        path="/client"
-                        render={
-                            props => (
-                                <Home {...props} />
-                            )
-                        }
-                    />
-                </Switch>
-            </Router>
+            <ThemeProvider theme={theme}>
+                <Router>
+                    <Switch>
+                        <Route exact path="/"
+                            render={
+                                props => (
+                                    <ThemeConsumer>
+                                        {(theme) => (
+                                            <Home {...props} theme={theme} />
+                                        )}
+                                    </ThemeConsumer>
+                                )
+                            }
+                            history={history}
+                        />
+                        <Route
+                            path="/client"
+                            render={
+                                props => (
+                                    <Home {...props} />
+                                )
+                            }
+                        />
+                    </Switch>
+                </Router>
+            </ThemeProvider>
         </AppWrapper>
     );
 }

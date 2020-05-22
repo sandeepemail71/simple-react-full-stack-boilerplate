@@ -1,29 +1,37 @@
-import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import React from 'react'
+import styled from 'styled-components'
+import { size } from 'styled-theme'
 
-import A from './A';
-import Img from './Img';
-import NavBar from './NavBar';
-import HeaderLink from './HeaderLink';
-import Banner from './banner.jpg';
-import messages from './messages';
+import { IconLink, PrimaryNavigation, Block } from 'components'
 
-function Header() {
+const Wrapper = styled(Block)`
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  @media screen and (max-width: 640px) {
+    padding: 0.5rem;
+  }
+`
+
+const InnerWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: ${size('maxWidth')};
+  > :not(:first-child) {
+    margin-left: 1rem;
+  }
+`
+
+const Header = (props) => {
   return (
-    <div>
-      <A href="https://www.reactboilerplate.com/">
-        <Img src={Banner} alt="react-boilerplate - Logo" />
-      </A>
-      <NavBar>
-        <HeaderLink to="/">
-          <FormattedMessage {...messages.home} />
-        </HeaderLink>
-        <HeaderLink to="/features">
-          <FormattedMessage {...messages.features} />
-        </HeaderLink>
-      </NavBar>
-    </div>
-  );
+    <Wrapper opaque reverse {...props}>
+      <InnerWrapper>
+        <IconLink to="/" icon="arc" height={100} />
+        <PrimaryNavigation reverse />
+      </InnerWrapper>
+    </Wrapper>
+  )
 }
 
-export default Header;
+export default Header

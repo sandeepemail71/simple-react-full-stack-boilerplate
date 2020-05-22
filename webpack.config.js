@@ -49,7 +49,7 @@ module.exports = {
         open: true,
         compress: true,
         disableHostCheck: true,
-        hotOnly: true,
+        hot: true,
         historyApiFallback: true,
         allowedHosts: [
             '.ngrok.io'
@@ -65,14 +65,27 @@ module.exports = {
         new CleanWebpackPlugin([outputDirectory]),
         new HtmlWebpackPlugin({
             template: './public/index.html',
-            favicon: './public/favicon.ico'
+            favicon: './public/favicon.ico',
+            minify: {
+				removeComments: true,
+				collapseWhitespace: true,
+				removeRedundantAttributes: true,
+				useShortDoctype: true,
+				removeEmptyAttributes: true,
+				removeStyleLinkTypeAttributes: true,
+				removeScriptTypeAttributes: true,
+				keepClosingSlash: true,
+				minifyJS: true,
+				minifyCSS: true,
+				minifyURLs: true
+			}
         })
     ],
     resolve: {
         modules: ['node_modules', 'src/client/app'],
         alias: {
+            components: path.resolve(__dirname, 'src/client/app/components'),
             containers: path.resolve(__dirname, 'src/client/app/containers'),
-            dateUtils: path.resolve(__dirname, 'src/client/app/utils/dateUtils.js'),
             utils: path.resolve(__dirname, 'src/client/app/utils'),
             images: path.resolve(__dirname, 'src/client/app/images')
         }

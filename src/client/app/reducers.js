@@ -4,6 +4,7 @@
 
 import { combineReducers } from 'redux';
 import appReducer from './containers/App/reducer';
+import homeReducer from './containers/Home/reducer';
 
 /**
  * Creates the main reducer with the dynamically injected ones
@@ -11,6 +12,7 @@ import appReducer from './containers/App/reducer';
 export default function createReducer(injectedReducers = {}) {
   const rootReducer = combineReducers({
     appReducer,
+    homeReducer,
     ...injectedReducers,
   });
 

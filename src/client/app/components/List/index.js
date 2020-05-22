@@ -1,33 +1,32 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled, { css } from 'styled-components'
+import { font, palette } from 'styled-theme'
 
-import Ul from './Ul';
-import Wrapper from './Wrapper';
+const styles = css`
+  font-family: ${font('primary')};
+  margin: 1rem 0;
+  padding-left: 1.6rem;
+  line-height: 1.7rem;
+  color: ${palette({ grayscale: 0 }, 1)};
+`
 
-function List(props) {
-  const ComponentToRender = props.component;
-  let content = <div />;
+const Ol = styled.ol`${styles}`
+const Ul = styled.ul`${styles}`
 
-  // If we have items, render them
-  if (props.items) {
-    content = props.items.map(item => (
-      <ComponentToRender key={`item-${item.id}`} item={item} />
-    ));
-  } else {
-    // Otherwise render a single component
-    content = <ComponentToRender />;
-  }
-
-  return (
-    <Wrapper>
-      <Ul>{content}</Ul>
-    </Wrapper>
-  );
+const List = ({ ordered, children, ...props }) => {
+  return React.createElement(ordered ? Ol : Ul, props, children)
 }
 
 List.propTypes = {
-  component: PropTypes.elementType.isRequired,
-  items: PropTypes.array,
-};
+  ordered: PropTypes.bool,
+  palette: PropTypes.string,
+  reverse: PropTypes.bool,
+  children: PropTypes.any,
+}
 
-export default List;
+List.defaultProps = {
+  palette: 'grayscale',
+}
+
+export default List

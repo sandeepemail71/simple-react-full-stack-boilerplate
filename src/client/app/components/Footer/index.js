@@ -1,30 +1,34 @@
-import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import React from 'react'
+import styled from 'styled-components'
+import { palette } from 'styled-theme'
 
-import A from 'components/A';
-import LocaleToggle from 'containers/LocaleToggle';
-import Wrapper from './Wrapper';
-import messages from './messages';
+import { Paragraph, Link, Icon } from 'components'
 
-function Footer() {
+const Wrapper = styled.div`
+  background-color: ${palette('grayscale', 1, true)};
+  padding: 2rem;
+`
+
+const Credits = styled(Paragraph)`
+  vertical-align: center;
+  text-align: center;
+  margin: 0;
+`
+
+const Footer = (props) => {
   return (
-    <Wrapper>
-      <section>
-        <FormattedMessage {...messages.licenseMessage} />
-      </section>
-      <section>
-        <LocaleToggle />
-      </section>
-      <section>
-        <FormattedMessage
-          {...messages.authorMessage}
-          values={{
-            author: <A href="https://twitter.com/mxstbr">Max Stoiber</A>,
-          }}
-        />
-      </section>
+    <Wrapper {...props}>
+      <Credits>
+        Made with
+        {' '}
+        <Icon icon="heart" />
+        {' '}
+by
+        {' '}
+        <Link href="https://github.com/diegohaz">Haz</Link>
+      </Credits>
     </Wrapper>
-  );
+  )
 }
 
-export default Footer;
+export default Footer

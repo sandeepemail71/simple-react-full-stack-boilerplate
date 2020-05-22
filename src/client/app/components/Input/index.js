@@ -1,34 +1,59 @@
-/**
- *
- * Button.js
- *
- * A common button, if you pass it a prop "route" it'll render a link to a react-router route
- * otherwise it'll render a link with an onclick
- */
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled, { css } from 'styled-components'
+import { font, palette } from 'styled-theme'
+import { ifProp } from 'styled-tools'
 
-import React from 'react';
-import PropTypes from 'prop-types';
+const fontSize = ({ height }) => `${height / 35.5555555556}rem`
 
-import StyledInput from './StyledInput';
-import Wrapper from './Wrapper';
-import Label from './Label';
+const styles = css`
+  font-family: ${font('primary')};
+  display: block;
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: ${fontSize};
+  padding: ${ifProp({ type: 'textarea' }, '0.4444444444em', '0 0.4444444444em')};
+  height: ${ifProp({ type: 'textarea' }, 'auto', '2.2222222222em')};
+  color: ${palette('grayscale', 0)};
+  background-color: ${palette('grayscale', 0, true)};
+  border: 1px solid ${ifProp('invalid', palette('danger', 2), palette('grayscale', 3))};
+  border-radius: 2px;
 
-function TextInput(props) {
-    const textInput = (
-        <Wrapper>
-            <Label>{props.label}</Label>
-            <StyledInput width='300px' height='40px' onClick={props.onclick} onChange={props.onChange} />
-        </Wrapper>
-    );
+  &[type=checkbox], &[type=radio] {
+    display: inline-block;
+    border: 0;
+    border-radius: 0;
+    width: auto;
+    height: auto;
+    margin: 0 0.2rem 0 0;
+  }
+`
 
+const StyledTextarea = styled.textarea`${styles}`
+const StyledSelect = styled.select`${styles}`
+const StyledInput = styled.input`${styles}`
 
-    return textInput;
+const Input = ({ ...props }) => {
+  const { type } = props
+  if (type === 'textarea') {
+    return <StyledTextarea {...props} />
+  } if (type === 'select') {
+    return <StyledSelect {...props} />
+  }
+  return <StyledInput {...props} />
 }
 
-TextInput.propTypes = {
-    onClick: PropTypes.func,
-    children: PropTypes.node,
-    onChange: PropTypes.func
-};
+Input.propTypes = {
+  type: PropTypes.string,
+  reverse: PropTypes.bool,
+  height: PropTypes.number,
+  invalid: PropTypes.bool,
+}
 
-export default TextInput;
+Input.defaultProps = {
+  type: 'text',
+  height: 40,
+}
+
+export default Input

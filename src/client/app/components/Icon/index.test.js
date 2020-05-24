@@ -1,4 +1,3 @@
-// https://github.com/diegohaz/arc/wiki/Example-components#icon
 import React from 'react'
 import { shallow } from 'enzyme'
 import Icon from '.'

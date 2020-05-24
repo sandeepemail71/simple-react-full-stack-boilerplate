@@ -19,11 +19,11 @@ import reducer from './reducer';
 import saga from './saga';
 
 import { ThemeProvider, ThemeConsumer } from 'styled-components'
-import theme from 'components/themes/default'
+import { theme } from 'components'
 
 import { makeSelectProps } from './selectors';
 
-import Home from './../Home';
+import Home from 'containers/Home';
 
 
 const AppWrapper = styled.div`

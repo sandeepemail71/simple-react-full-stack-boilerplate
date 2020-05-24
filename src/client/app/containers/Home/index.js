@@ -18,8 +18,7 @@ import saga from './saga';
 
 import { makeSelectProps } from './selectors';
 
-import Button from 'components/Button'
-
+import { Button } from 'components'
 
 const HomeWrapper = styled.div`
   margin: 0 auto;
@@ -29,7 +28,6 @@ const HomeWrapper = styled.div`
 `;
 
 function Home(props) {
-    console.log(props.theme,"======props.theme")
 	return (
 		<HomeWrapper>
             <h1>Home component</h1>

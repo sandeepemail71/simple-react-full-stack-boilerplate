@@ -84,7 +84,7 @@ module.exports = {
     resolve: {
         modules: ['node_modules', 'src/client/app'],
         alias: {
-            components: path.resolve(__dirname, 'src/client/app/components'),
+            components: path.resolve(__dirname, 'src/client/app/components/index.js'),
             containers: path.resolve(__dirname, 'src/client/app/containers'),
             utils: path.resolve(__dirname, 'src/client/app/utils'),
             images: path.resolve(__dirname, 'src/client/app/images')

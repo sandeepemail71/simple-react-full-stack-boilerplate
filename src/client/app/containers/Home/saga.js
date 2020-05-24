@@ -8,7 +8,7 @@ function* fetchStations(action) {
 }
 
 
-export default function* appSaga() {
+export default function* homeSaga() {
   yield all([
     yield takeLatest('FETCH_STATIONS', fetchStations),
   ]);

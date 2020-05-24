@@ -13,12 +13,12 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
+import { Button } from 'components';
 import reducer from './reducer';
 import saga from './saga';
 
 import { makeSelectProps } from './selectors';
 
-import { Button } from 'components'
 
 const HomeWrapper = styled.div`
   margin: 0 auto;
@@ -27,13 +27,19 @@ const HomeWrapper = styled.div`
   flex-direction: column;
 `;
 
+const Building = styled.div`
+    border: solid 2px;
+    height: 100px;
+    width: 400px;
+`;
+
 function Home(props) {
-	return (
-		<HomeWrapper>
-            <h1>Home component</h1>
+    return (
+        <HomeWrapper>
+            <Building />
             <Button>Submit</Button>
-		</HomeWrapper>
-	);
+        </HomeWrapper>
+    );
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -41,20 +47,20 @@ const mapStateToProps = createStructuredSelector({
 });
 
 function mapDispatchToProps(dispatch) {
-	return {
-		triggerDispatch: () => dispatch(),
-	};
+    return {
+        triggerDispatch: () => dispatch(),
+    };
 }
 
 const withConnect = connect(
-	mapStateToProps,
-	mapDispatchToProps,
+    mapStateToProps,
+    mapDispatchToProps,
 );
 
 const withReducer = injectReducer({ key: 'home', reducer });
 const withSaga = injectSaga({ key: 'home', saga });
 export default compose(
-	withReducer,
-	withSaga,
-	withConnect
+    withReducer,
+    withSaga,
+    withConnect
 )(Home);

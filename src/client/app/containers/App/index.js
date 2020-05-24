@@ -7,24 +7,19 @@
  */
 
 import React from 'react';
-import styled from 'styled-components';
-import { Switch, Route, BrowserRouter as Router, } from 'react-router-dom';
+import styled, { ThemeProvider } from 'styled-components';
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import history from 'utils/history'
+import history from 'utils/history';
 import { createStructuredSelector } from 'reselect';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
+import { theme } from 'components';
+import Home from 'containers/Home';
 import reducer from './reducer';
 import saga from './saga';
-
-import { ThemeProvider, ThemeConsumer } from 'styled-components'
-import { theme } from 'components'
-
 import { makeSelectProps } from './selectors';
-
-import Home from 'containers/Home';
-
 
 const AppWrapper = styled.div`
   margin: 0 auto;
@@ -39,14 +34,12 @@ function App(props) {
             <ThemeProvider theme={theme}>
                 <Router>
                     <Switch>
-                        <Route exact path="/"
+                        <Route
+                            exact
+                            path="/"
                             render={
-                                props => (
-                                    <ThemeConsumer>
-                                        {(theme) => (
-                                            <Home {...props} theme={theme} />
-                                        )}
-                                    </ThemeConsumer>
+                                () => (
+                                    <Home {...props} theme={theme} />
                                 )
                             }
                             history={history}
@@ -54,7 +47,7 @@ function App(props) {
                         <Route
                             path="/client"
                             render={
-                                props => (
+                                () => (
                                     <Home {...props} />
                                 )
                             }
@@ -72,7 +65,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
     return {
-        triggerDispatch: () => dispatch(),
+        triggerDispatch: () => dispatch()
     };
 }
 
